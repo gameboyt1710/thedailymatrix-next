@@ -1,0 +1,1038 @@
+/* ==========================================================================
+   The Daily Matrix - Premium Dark Design
+   Inspired by Linear, Raycast, Stripe
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  /* Rich dark palette with depth */
+  --bg-base: #09090B;
+  --bg-elevated: #111113;
+  --bg-surface: #18181B;
+  --bg-surface-hover: #1F1F23;
+  --bg-accent: #27272A;
+  
+  /* Glassmorphism */
+  --glass: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.06);
+  --glass-border-hover: rgba(255, 255, 255, 0.12);
+  
+  /* Text hierarchy */
+  --text-primary: #FAFAFA;
+  --text-secondary: #A1A1AA;
+  --text-tertiary: #71717A;
+  --text-quaternary: #52525B;
+  
+  /* Vibrant accents */
+  --accent-primary: #8B5CF6;  /* Purple */
+  --accent-primary-glow: rgba(139, 92, 246, 0.15);
+  --accent-secondary: #06B6D4; /* Cyan */
+  --accent-orange: #F97316;
+  --accent-orange-glow: rgba(249, 115, 22, 0.12);
+  
+  /* Status colors */
+  --success: #22C55E;
+  --success-bg: rgba(34, 197, 94, 0.1);
+  --error: #EF4444;
+  --error-bg: rgba(239, 68, 68, 0.1);
+  
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+  --gradient-glow: radial-gradient(ellipse at 50% 0%, rgba(139, 92, 246, 0.15) 0%, transparent 50%);
+  --gradient-surface: linear-gradient(180deg, var(--bg-surface) 0%, var(--bg-elevated) 100%);
+  
+  /* Typography */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  
+  /* Sizing */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+  --radius-full: 9999px;
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.5);
+  --shadow-glow: 0 0 40px var(--accent-primary-glow);
+}
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--bg-base);
+  color: var(--text-primary);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+::selection {
+  background: var(--accent-primary);
+  color: white;
+}
+
+/* ==========================================================================
+   Header - Glassmorphism
+   ========================================================================== */
+
+.site-header {
+  position: fixed;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  padding: 10px 20px;
+  background: rgba(17, 17, 19, 0.7);
+  backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-lg);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.site-logo {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--gradient-primary);
+  border-radius: 50%;
+  box-shadow: 0 0 12px var(--accent-primary);
+}
+
+.site-nav {
+  display: flex;
+  gap: 4px;
+}
+
+.nav-link {
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  color: var(--text-secondary);
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  transition: all 0.2s ease;
+}
+
+.nav-link:hover {
+  color: var(--text-primary);
+  background: var(--glass);
+}
+
+.nav-link.active {
+  color: var(--text-primary);
+  background: var(--bg-accent);
+}
+
+/* ==========================================================================
+   Main
+   ========================================================================== */
+
+main {
+  position: relative;
+  padding-top: 80px;
+}
+
+/* Background glow */
+main::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 1200px;
+  height: 600px;
+  background: var(--gradient-glow);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* ==========================================================================
+   Masthead
+   ========================================================================== */
+
+.masthead {
+  padding: 80px 24px 64px;
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.masthead-date {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.masthead-title {
+  font-size: clamp(40px, 8vw, 64px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  margin-bottom: 20px;
+  background: linear-gradient(180deg, var(--text-primary) 0%, var(--text-secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.masthead-subtitle {
+  font-size: 17px;
+  color: var(--text-tertiary);
+  max-width: 400px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.edition-info {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 28px;
+}
+
+.edition-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-tertiary);
+  padding: 8px 14px;
+  background: var(--bg-surface);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-full);
+}
+
+.live-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--success);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--success);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+/* ==========================================================================
+   Quote Banner
+   ========================================================================== */
+
+.quote-banner {
+  background: var(--gradient-primary);
+  padding: 14px 0;
+  overflow: hidden;
+  margin: 0 24px;
+  border-radius: var(--radius-lg);
+}
+
+.quote-inner {
+  display: flex;
+  align-items: center;
+  gap: 48px;
+  animation: marquee 35s linear infinite;
+  white-space: nowrap;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.quote-text {
+  font-size: 14px;
+  font-weight: 600;
+  color: white;
+}
+
+.quote-author {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.quote-divider {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+/* ==========================================================================
+   Sections
+   ========================================================================== */
+
+.section {
+  padding: 64px 24px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 28px;
+}
+
+.section-title {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.section-number {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-quaternary);
+  padding: 6px 12px;
+  background: var(--bg-surface);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-full);
+}
+
+/* ==========================================================================
+   Cards - Glass Effect
+   ========================================================================== */
+
+.snapshot-row {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 12px;
+}
+
+.snapshot-item {
+  background: var(--bg-surface);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  transition: all 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.snapshot-item::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--accent-primary-glow) 0%, transparent 50%);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.snapshot-item:hover {
+  border-color: var(--glass-border-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-glow);
+}
+
+.snapshot-item:hover::before {
+  opacity: 1;
+}
+
+.snapshot-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--text-quaternary);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.snapshot-value {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  position: relative;
+}
+
+.snapshot-change {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  margin-top: 8px;
+  display: inline-flex;
+  padding: 3px 8px;
+  border-radius: var(--radius-sm);
+  position: relative;
+}
+
+.snapshot-change.positive {
+  color: var(--success);
+  background: var(--success-bg);
+}
+
+.snapshot-change.negative {
+  color: var(--error);
+  background: var(--error-bg);
+}
+
+.snapshot-sub {
+  font-size: 11px;
+  color: var(--text-tertiary);
+  margin-top: 4px;
+  position: relative;
+}
+
+/* ==========================================================================
+   Crypto Table
+   ========================================================================== */
+
+.table-wrapper {
+  background: var(--bg-surface);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  margin-top: 24px;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.data-table th {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-quaternary);
+  text-align: left;
+  padding: 14px 20px;
+  background: var(--bg-elevated);
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.data-table td {
+  padding: 16px 20px;
+  font-size: 13px;
+  border-bottom: 1px solid var(--glass-border);
+  transition: background 0.15s ease;
+}
+
+.data-table tr:last-child td {
+  border-bottom: none;
+}
+
+.data-table tr:hover td {
+  background: var(--bg-surface-hover);
+}
+
+.coin-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.coin-rank {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-quaternary);
+  width: 20px;
+}
+
+.coin-symbol {
+  font-weight: 600;
+}
+
+.coin-name {
+  font-size: 12px;
+  color: var(--text-tertiary);
+}
+
+.price-cell {
+  font-family: var(--font-mono);
+  font-weight: 500;
+}
+
+.change-cell {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+}
+
+.change-cell.positive {
+  color: var(--success);
+  background: var(--success-bg);
+}
+
+.change-cell.negative {
+  color: var(--error);
+  background: var(--error-bg);
+}
+
+.market-summary {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-top: 20px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-tertiary);
+}
+
+.summary-up { color: var(--success); }
+.summary-down { color: var(--error); }
+
+/* ==========================================================================
+   Weather Grid
+   ========================================================================== */
+
+.weather-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 12px;
+}
+
+.weather-item {
+  background: var(--bg-surface);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  transition: all 0.25s ease;
+  position: relative;
+}
+
+.weather-item:hover {
+  border-color: var(--accent-secondary);
+  box-shadow: 0 0 30px rgba(6, 182, 212, 0.1);
+}
+
+.weather-city {
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 12px;
+  color: var(--text-primary);
+}
+
+.weather-temp {
+  font-size: 36px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.weather-unit {
+  font-size: 16px;
+  color: var(--text-tertiary);
+}
+
+.weather-condition {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-top: 8px;
+  text-transform: capitalize;
+}
+
+.weather-details {
+  display: flex;
+  gap: 12px;
+  margin-top: 12px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-quaternary);
+}
+
+/* ==========================================================================
+   Moon Display
+   ========================================================================== */
+
+.moon-display {
+  display: inline-flex;
+  align-items: center;
+  gap: 28px;
+  padding: 28px 36px;
+  background: var(--gradient-surface);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-xl);
+  position: relative;
+  overflow: hidden;
+}
+
+.moon-display::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: -50px;
+  transform: translateY(-50%);
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.1) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.moon-visual {
+  font-size: 56px;
+  line-height: 1;
+  filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.2));
+}
+
+.moon-phase-name {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.moon-illumination {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-tertiary);
+}
+
+/* ==========================================================================
+   Timeline
+   ========================================================================== */
+
+.timeline {
+  display: grid;
+  gap: 8px;
+}
+
+.timeline-item {
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  gap: 20px;
+  padding: 18px 22px;
+  background: var(--bg-surface);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  transition: all 0.2s ease;
+}
+
+.timeline-item:hover {
+  border-color: var(--accent-orange);
+  background: var(--bg-surface-hover);
+}
+
+.timeline-year {
+  font-family: var(--font-mono);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--accent-orange);
+}
+
+.timeline-text {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+/* ==========================================================================
+   Birthdays
+   ========================================================================== */
+
+.birthdays-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.birthday-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: var(--bg-surface);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-full);
+  font-size: 13px;
+  transition: all 0.2s ease;
+}
+
+.birthday-tag:hover {
+  border-color: var(--accent-primary);
+  background: var(--accent-primary-glow);
+}
+
+.birthday-year {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  color: var(--accent-primary);
+}
+
+/* ==========================================================================
+   Word of the Day
+   ========================================================================== */
+
+.word-display {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 32px;
+  padding: 32px;
+  background: var(--bg-surface);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-xl);
+  max-width: 800px;
+}
+
+.word-left {
+  border-right: 1px solid var(--glass-border);
+  padding-right: 32px;
+}
+
+.word-text {
+  font-size: 36px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  margin-bottom: 10px;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.word-phonetic {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--text-tertiary);
+}
+
+.word-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.word-pos {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--accent-primary);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.word-definition {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  margin-bottom: 14px;
+}
+
+.word-example {
+  font-style: italic;
+  color: var(--text-tertiary);
+  padding-left: 14px;
+  border-left: 2px solid var(--accent-primary);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/* ==========================================================================
+   Number Fact
+   ========================================================================== */
+
+.number-display {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  padding: 32px;
+  background: var(--bg-surface);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-xl);
+  max-width: 650px;
+  position: relative;
+  overflow: hidden;
+}
+
+.number-display::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--gradient-primary);
+}
+
+.number-big {
+  font-size: 64px;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  min-width: 100px;
+  text-align: center;
+}
+
+.number-fact-text {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+/* ==========================================================================
+   Archive Banner
+   ========================================================================== */
+
+.archive-banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 28px 36px;
+  background: var(--gradient-primary);
+  text-decoration: none;
+  border-radius: var(--radius-xl);
+  margin: 48px 24px;
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.archive-banner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.5s ease;
+}
+
+.archive-banner:hover::before {
+  transform: translateX(100%);
+}
+
+.archive-banner:hover {
+  transform: scale(1.01);
+  box-shadow: 0 20px 50px rgba(139, 92, 246, 0.3);
+}
+
+.archive-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 4px;
+}
+
+.archive-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: white;
+}
+
+.archive-arrow {
+  font-size: 24px;
+  color: white;
+  transition: transform 0.2s ease;
+}
+
+.archive-banner:hover .archive-arrow {
+  transform: translateX(4px);
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+
+.site-footer {
+  padding: 48px 24px;
+  text-align: center;
+  border-top: 1px solid var(--glass-border);
+  margin-top: 32px;
+}
+
+.footer-timestamp {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-quaternary);
+}
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+
+@media (max-width: 1200px) {
+  .snapshot-row {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .snapshot-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .word-display {
+    grid-template-columns: 1fr;
+    max-width: 100%;
+  }
+  
+  .word-left {
+    border-right: none;
+    border-bottom: 1px solid var(--glass-border);
+    padding-right: 0;
+    padding-bottom: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .site-header {
+    top: 8px;
+    left: 12px;
+    right: 12px;
+    transform: none;
+    padding: 8px 16px;
+  }
+  
+  .site-nav {
+    display: none;
+  }
+  
+  .masthead {
+    padding: 60px 20px 48px;
+  }
+  
+  .masthead-title {
+    font-size: 36px;
+  }
+  
+  .quote-banner {
+    margin: 0 16px;
+    border-radius: var(--radius-md);
+  }
+  
+  .section {
+    padding: 48px 16px;
+  }
+  
+  .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  
+  .snapshot-row {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  
+  .weather-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  
+  .timeline-item {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+  
+  .word-display {
+    padding: 24px;
+  }
+  
+  .word-text {
+    font-size: 28px;
+  }
+  
+  .number-display {
+    flex-direction: column;
+    text-align: center;
+    padding: 24px;
+  }
+  
+  .number-display::before {
+    width: 100%;
+    height: 4px;
+    top: 0;
+    left: 0;
+  }
+  
+  .number-big {
+    font-size: 52px;
+    min-width: auto;
+  }
+  
+  .moon-display {
+    padding: 20px;
+    gap: 20px;
+  }
+  
+  .moon-visual {
+    font-size: 44px;
+  }
+  
+  .archive-banner {
+    margin: 32px 16px;
+    padding: 24px;
+    flex-direction: column;
+    text-align: center;
+    gap: 12px;
+  }
+  
+  .archive-arrow {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .snapshot-row {
+    grid-template-columns: 1fr;
+  }
+  
+  .weather-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .edition-info {
+    flex-direction: column;
+  }
+}
