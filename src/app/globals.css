@@ -1,49 +1,47 @@
 /* ==========================================================================
-   The Daily Matrix - Premium Dark Theme Design System
+   The Daily Matrix - Editorial Design System
+   Anti-AI, Newspaper-inspired, Typography-first
    ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 /* CSS Custom Properties */
 :root {
-  /* Dark theme colors */
-  --bg-primary: #0a0a0f;
-  --bg-secondary: #12121a;
-  --bg-tertiary: #1a1a24;
-  --bg-card: rgba(20, 20, 30, 0.8);
-  --bg-card-hover: rgba(30, 30, 45, 0.9);
+  /* Warm, editorial color palette - NO purple/cyan gradients */
+  --bg-primary: #FAFAF8;
+  --bg-secondary: #F0EDE8;
+  --bg-tertiary: #E8E4DD;
+  --bg-dark: #1A1A1A;
+  --bg-card: #FFFFFF;
   
-  /* Text colors */
-  --text-primary: #f0f0f5;
-  --text-secondary: #a0a0b0;
-  --text-muted: #606070;
+  /* Text - high contrast */
+  --text-primary: #0D0D0D;
+  --text-secondary: #4A4A4A;
+  --text-muted: #7A7A7A;
+  --text-light: #FAFAF8;
   
-  /* Accent colors */
-  --accent-cyan: #00d4ff;
-  --accent-purple: #8b5cf6;
-  --accent-pink: #ec4899;
-  --accent-green: #10b981;
-  --accent-red: #ef4444;
-  --accent-yellow: #f59e0b;
-  --accent-orange: #f97316;
+  /* Single bold accent - vermillion/orange-red */
+  --accent: #E63312;
+  --accent-hover: #CC2D10;
+  --accent-light: rgba(230, 51, 18, 0.1);
   
-  /* Gradients */
-  --gradient-primary: linear-gradient(135deg, #00d4ff 0%, #8b5cf6 50%, #ec4899 100%);
-  --gradient-accent: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);
-  --gradient-glow: radial-gradient(ellipse at center, rgba(0, 212, 255, 0.15) 0%, transparent 70%);
+  /* Functional colors */
+  --positive: #1D7A3F;
+  --negative: #C62828;
+  --border: #D4D0C8;
+  --border-dark: #2A2A2A;
   
-  /* Glass effects */
-  --glass-bg: rgba(255, 255, 255, 0.03);
-  --glass-border: rgba(255, 255, 255, 0.08);
-  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  /* Typography */
+  --font-display: 'Instrument Serif', Georgia, serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', 'SF Mono', monospace;
   
   /* Sizing */
-  --container-max: 1400px;
-  --border-radius: 16px;
-  --border-radius-sm: 8px;
+  --container-max: 1100px;
+  --grid-gap: 24px;
   
-  /* Transitions */
-  --transition-fast: 150ms ease;
-  --transition-normal: 250ms ease;
-  --transition-slow: 400ms ease;
+  /* Editorial = sharp edges */
+  --radius: 0px;
 }
 
 /* ==========================================================================
@@ -56,250 +54,222 @@
   padding: 0;
 }
 
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: var(--font-body);
   background: var(--bg-primary);
   color: var(--text-primary);
   line-height: 1.6;
   min-height: 100vh;
-  overflow-x: hidden;
-}
-
-body::before {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: 
-    radial-gradient(ellipse at 20% 20%, rgba(139, 92, 246, 0.08) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 80%, rgba(0, 212, 255, 0.08) 0%, transparent 50%),
-    radial-gradient(ellipse at 50% 50%, rgba(236, 72, 153, 0.03) 0%, transparent 70%);
-  pointer-events: none;
-  z-index: -1;
 }
 
 main {
   max-width: var(--container-max);
   margin: 0 auto;
-  padding: 0 24px;
-}
-
-a {
-  color: var(--accent-cyan);
-  text-decoration: none;
-  transition: color var(--transition-fast);
-}
-
-a:hover {
-  color: var(--accent-purple);
+  padding: 0 24px 80px;
 }
 
 /* ==========================================================================
-   Hero Section
+   Typography - Editorial Style
    ========================================================================== */
 
-.hero {
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+a {
+  color: var(--text-primary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.15s ease;
+}
+
+a:hover {
+  color: var(--accent);
+}
+
+/* ==========================================================================
+   Header & Navigation
+   ========================================================================== */
+
+.site-header {
+  border-bottom: 1px solid var(--border);
+  padding: 16px 0;
+  position: sticky;
+  top: 0;
+  background: var(--bg-primary);
+  z-index: 100;
+}
+
+.header-inner {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.site-logo {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.site-logo:hover {
+  color: var(--text-primary);
+}
+
+.logo-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--accent);
+  border-radius: 50%;
+}
+
+.site-nav {
+  display: flex;
+  gap: 32px;
+}
+
+.nav-link {
+  font-size: 13px;
+  text-decoration: none;
+  color: var(--text-secondary);
+  transition: color 0.15s ease;
   position: relative;
-  padding: 80px 0 60px;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: var(--text-primary);
+}
+
+.nav-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--text-primary);
+}
+
+/* ==========================================================================
+   Masthead / Hero - Newspaper Style
+   ========================================================================== */
+
+.masthead {
+  padding: 60px 0 48px;
   text-align: center;
-  overflow: hidden;
+  border-bottom: 1px solid var(--border);
 }
 
-.hero-content {
-  position: relative;
-  z-index: 1;
+.masthead-date {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.15em;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+  text-transform: uppercase;
 }
 
-.hero-badge {
+.masthead-title {
+  font-family: var(--font-display);
+  font-size: clamp(4rem, 15vw, 8rem);
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  line-height: 0.85;
+  margin-bottom: 20px;
+}
+
+.masthead-subtitle {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-style: italic;
+  color: var(--text-secondary);
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.edition-info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+
+.edition-badge {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 8px 20px;
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  border-radius: 50px;
-  font-size: 13px;
-  color: var(--text-secondary);
-  margin-bottom: 24px;
-  backdrop-filter: blur(10px);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
 }
 
-.hero-title {
-  font-size: clamp(3rem, 8vw, 5rem);
-  font-weight: 800;
-  letter-spacing: -2px;
-  background: var(--gradient-primary);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  margin-bottom: 16px;
-  line-height: 1.1;
-}
-
-.hero-icon {
-  display: inline-block;
-  font-size: 0.8em;
+.live-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--accent);
+  border-radius: 50%;
   animation: pulse 2s ease-in-out infinite;
 }
 
 @keyframes pulse {
   0%, 100% { opacity: 1; }
-  50% { opacity: 0.5; }
-}
-
-.hero-tagline {
-  font-size: 1.25rem;
-  color: var(--text-secondary);
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-.hero-glow {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 800px;
-  height: 400px;
-  transform: translate(-50%, -50%);
-  background: var(--gradient-glow);
-  filter: blur(80px);
-  opacity: 0.6;
-  pointer-events: none;
+  50% { opacity: 0.3; }
 }
 
 /* ==========================================================================
-   Section Styles
+   Section Headers
    ========================================================================== */
 
 .section {
-  margin-bottom: 60px;
+  padding: 48px 0;
+  border-bottom: 1px solid var(--border);
 }
 
-.section-title {
+.section:last-of-type {
+  border-bottom: none;
+}
+
+.section-header {
   display: flex;
-  align-items: center;
-  gap: 12px;
-  font-size: 1.75rem;
-  font-weight: 700;
-  margin-bottom: 24px;
-  color: var(--text-primary);
-}
-
-.section-icon {
-  font-size: 1.5rem;
-}
-
-h3 {
-  font-size: 1.25rem;
-  margin: 32px 0 16px;
-  color: var(--text-secondary);
-}
-
-/* ==========================================================================
-   Today's Snapshot Section
-   ========================================================================== */
-
-.today-snapshot {
-  margin-bottom: 60px;
-}
-
-.snapshot-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 20px;
+  align-items: baseline;
+  gap: 16px;
   margin-bottom: 32px;
 }
 
-.snapshot-card {
-  position: relative;
-  padding: 24px;
-  background: var(--bg-card);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--border-radius);
-  backdrop-filter: blur(10px);
-  transition: all var(--transition-normal);
-  overflow: hidden;
-}
-
-.snapshot-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: var(--gradient-primary);
-  opacity: 0;
-  transition: opacity var(--transition-normal);
-}
-
-.snapshot-card:hover {
-  transform: translateY(-4px);
-  border-color: rgba(255, 255, 255, 0.15);
-  box-shadow: var(--glass-shadow);
-}
-
-.snapshot-card:hover::before {
-  opacity: 1;
-}
-
-.snapshot-icon {
+.section-title {
+  font-family: var(--font-display);
   font-size: 2rem;
-  margin-bottom: 12px;
 }
 
-.snapshot-label {
-  display: block;
-  font-size: 13px;
+.section-number {
+  font-family: var(--font-mono);
+  font-size: 11px;
   color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  margin-bottom: 4px;
-}
-
-.snapshot-value {
-  display: block;
-  font-size: 1.75rem;
-  font-weight: 700;
-  color: var(--text-primary);
-}
-
-.snapshot-change {
-  display: inline-block;
-  font-size: 14px;
-  margin-top: 8px;
-  padding: 4px 10px;
-  border-radius: 20px;
-  background: rgba(255, 255, 255, 0.05);
-}
-
-.snapshot-change.positive {
-  color: var(--accent-green);
-  background: rgba(16, 185, 129, 0.1);
-}
-
-.snapshot-change.negative {
-  color: var(--accent-red);
-  background: rgba(239, 68, 68, 0.1);
-}
-
-.snapshot-sublabel {
-  display: block;
-  font-size: 13px;
-  color: var(--text-secondary);
-  margin-top: 4px;
-}
-
-/* Bitcoin card special */
-.snapshot-card.bitcoin {
-  background: linear-gradient(135deg, rgba(247, 147, 26, 0.1) 0%, var(--bg-card) 100%);
-}
-
-/* Ethereum card special */
-.snapshot-card.ethereum {
-  background: linear-gradient(135deg, rgba(98, 126, 234, 0.1) 0%, var(--bg-card) 100%);
+  letter-spacing: 0.05em;
 }
 
 /* ==========================================================================
@@ -307,184 +277,180 @@ h3 {
    ========================================================================== */
 
 .quote-banner {
-  position: relative;
-  padding: 32px 40px;
-  background: var(--bg-card);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--border-radius);
-  backdrop-filter: blur(10px);
-  text-align: center;
-  overflow: hidden;
+  padding: 48px 0;
+  border-bottom: 1px solid var(--border);
 }
 
-.quote-banner::before {
-  content: '"';
-  position: absolute;
-  top: -20px;
-  left: 20px;
-  font-size: 120px;
-  font-family: Georgia, serif;
-  color: rgba(139, 92, 246, 0.1);
-  line-height: 1;
+.quote-inner {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
 }
 
 .quote-text {
-  font-size: 1.25rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
   font-style: italic;
-  color: var(--text-primary);
-  margin: 0 0 12px 0;
-  position: relative;
-  z-index: 1;
+  line-height: 1.35;
+  margin-bottom: 20px;
 }
 
 .quote-author {
-  font-size: 14px;
-  color: var(--accent-purple);
-  font-style: normal;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  text-transform: uppercase;
 }
 
 /* ==========================================================================
-   Stats Grid
+   Market Snapshot - Ticker Style
    ========================================================================== */
 
-.stats-grid {
+.snapshot-row {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 16px;
-  margin-bottom: 32px;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  border: 1px solid var(--border);
+  background: var(--bg-card);
 }
 
-.stat-card {
+.snapshot-item {
   padding: 20px;
-  background: var(--bg-card);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--border-radius-sm);
+  border-right: 1px solid var(--border);
   text-align: center;
 }
 
-.stat-label {
-  display: block;
-  font-size: 12px;
+.snapshot-item:last-child {
+  border-right: none;
+}
+
+.snapshot-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
   color: var(--text-muted);
   text-transform: uppercase;
-  letter-spacing: 0.5px;
   margin-bottom: 8px;
 }
 
-.stat-value {
-  display: block;
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--text-primary);
+.snapshot-value {
+  font-family: var(--font-mono);
+  font-size: 1.25rem;
+  font-weight: 600;
 }
 
-.stat-sublabel {
-  display: block;
+.snapshot-change {
+  font-family: var(--font-mono);
   font-size: 12px;
-  color: var(--text-secondary);
   margin-top: 4px;
 }
 
-.stat-card.feargreed.extreme-fear { border-color: var(--accent-red); }
-.stat-card.feargreed.fear { border-color: var(--accent-orange); }
-.stat-card.feargreed.neutral { border-color: var(--accent-yellow); }
-.stat-card.feargreed.greed { border-color: var(--accent-green); }
-.stat-card.feargreed.extreme-greed { border-color: #00ff88; }
+.snapshot-change.positive { color: var(--positive); }
+.snapshot-change.negative { color: var(--negative); }
+
+.snapshot-sub {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
 
 /* ==========================================================================
    Crypto Table
    ========================================================================== */
 
-.crypto-table-wrapper {
+.table-wrapper {
   overflow-x: auto;
-  border-radius: var(--border-radius);
+  border: 1px solid var(--border);
   background: var(--bg-card);
-  border: 1px solid var(--glass-border);
 }
 
-.crypto-table {
+.data-table {
   width: 100%;
   border-collapse: collapse;
+}
+
+.data-table th {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-align: left;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-secondary);
+}
+
+.data-table th:first-child {
+  padding-left: 20px;
+}
+
+.data-table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border);
   font-size: 14px;
 }
 
-.crypto-table th {
-  padding: 16px 20px;
-  text-align: left;
-  font-size: 12px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  color: var(--text-muted);
-  background: rgba(0, 0, 0, 0.2);
-  border-bottom: 1px solid var(--glass-border);
+.data-table td:first-child {
+  padding-left: 20px;
 }
 
-.crypto-table td {
-  padding: 16px 20px;
-  border-bottom: 1px solid var(--glass-border);
-  transition: background var(--transition-fast);
-}
-
-.crypto-table tr:last-child td {
+.data-table tr:last-child td {
   border-bottom: none;
 }
 
-.crypto-table tr:hover td {
-  background: rgba(255, 255, 255, 0.02);
+.data-table tr:hover td {
+  background: var(--bg-secondary);
 }
 
-.crypto-table .rank {
+.coin-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.coin-rank {
+  font-family: var(--font-mono);
+  font-size: 12px;
   color: var(--text-muted);
+  width: 24px;
+}
+
+.coin-symbol {
+  font-weight: 600;
+}
+
+.coin-name {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.price-cell {
+  font-family: var(--font-mono);
   font-weight: 500;
 }
 
-.crypto-table .name {
-  font-weight: 600;
+.change-cell {
+  font-family: var(--font-mono);
+  font-size: 13px;
 }
 
-.crypto-table .symbol {
-  color: var(--accent-cyan);
-  margin-right: 8px;
-}
-
-.crypto-table .fullname {
-  color: var(--text-secondary);
-  font-weight: 400;
-}
-
-.crypto-table .price {
-  font-weight: 600;
-  font-family: 'JetBrains Mono', monospace;
-}
-
-.crypto-table .change.positive {
-  color: var(--accent-green);
-}
-
-.crypto-table .change.negative {
-  color: var(--accent-red);
-}
-
-.crypto-table .market-cap {
-  color: var(--text-secondary);
-}
+.change-cell.positive { color: var(--positive); }
+.change-cell.negative { color: var(--negative); }
 
 .market-summary {
   display: flex;
   justify-content: center;
   gap: 32px;
-  margin-top: 20px;
-  font-size: 14px;
+  margin-top: 16px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-muted);
 }
 
-.market-summary .gainers {
-  color: var(--accent-green);
-}
-
-.market-summary .losers {
-  color: var(--accent-red);
-}
+.summary-up { color: var(--positive); }
+.summary-down { color: var(--negative); }
 
 /* ==========================================================================
    Weather Grid
@@ -492,86 +458,82 @@ h3 {
 
 .weather-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 20px;
-}
-
-.weather-card {
-  padding: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  border: 1px solid var(--border);
   background: var(--bg-card);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--border-radius);
-  text-align: center;
-  transition: all var(--transition-normal);
 }
 
-.weather-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--glass-shadow);
+.weather-item {
+  padding: 24px 20px;
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
 }
 
-.weather-icon {
-  font-size: 3rem;
-  margin-bottom: 8px;
+.weather-item:nth-child(6n) {
+  border-right: none;
 }
 
 .weather-city {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--text-primary);
-  margin-bottom: 4px;
+  font-weight: 500;
+  margin-bottom: 12px;
 }
 
 .weather-temp {
-  font-size: 2rem;
-  font-weight: 700;
-  color: var(--accent-cyan);
-  margin-bottom: 4px;
+  font-family: var(--font-mono);
+  font-size: 2.5rem;
+  font-weight: 600;
+  line-height: 1;
 }
 
-.weather-desc {
+.weather-unit {
+  font-size: 1rem;
+  color: var(--text-muted);
+}
+
+.weather-condition {
   font-size: 13px;
   color: var(--text-secondary);
-  margin-bottom: 12px;
+  margin-top: 8px;
 }
 
 .weather-details {
   display: flex;
-  justify-content: center;
-  gap: 16px;
-  font-size: 12px;
+  gap: 12px;
+  margin-top: 12px;
+  font-family: var(--font-mono);
+  font-size: 11px;
   color: var(--text-muted);
 }
 
 /* ==========================================================================
-   Moon Card
+   Moon Display
    ========================================================================== */
 
-.moon-card {
+.moon-display {
   display: flex;
   align-items: center;
-  gap: 24px;
+  gap: 32px;
   padding: 32px;
   background: var(--bg-card);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--border-radius);
+  border: 1px solid var(--border);
   max-width: 400px;
 }
 
-.moon-emoji {
+.moon-visual {
   font-size: 4rem;
+  line-height: 1;
 }
 
-.moon-phase {
+.moon-phase-name {
+  font-family: var(--font-display);
   font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--text-primary);
   margin-bottom: 4px;
 }
 
 .moon-illumination {
-  font-size: 14px;
-  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--text-muted);
 }
 
 /* ==========================================================================
@@ -579,100 +541,84 @@ h3 {
    ========================================================================== */
 
 .timeline {
-  position: relative;
-  padding-left: 40px;
-}
-
-.timeline::before {
-  content: '';
-  position: absolute;
-  left: 8px;
-  top: 0;
-  bottom: 0;
-  width: 2px;
-  background: linear-gradient(180deg, var(--accent-cyan), var(--accent-purple));
+  max-width: 700px;
 }
 
 .timeline-item {
-  position: relative;
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 24px;
   padding: 16px 0;
-  display: flex;
-  gap: 16px;
-  align-items: flex-start;
+  border-bottom: 1px solid var(--border);
+}
+
+.timeline-item:last-child {
+  border-bottom: none;
 }
 
 .timeline-year {
-  min-width: 60px;
-  font-weight: 700;
-  color: var(--accent-cyan);
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--accent);
 }
 
-.timeline-dot {
-  position: absolute;
-  left: -36px;
-  top: 20px;
-  width: 12px;
-  height: 12px;
-  background: var(--accent-purple);
-  border-radius: 50%;
-  border: 2px solid var(--bg-primary);
-}
-
-.timeline-content {
-  flex: 1;
-  color: var(--text-secondary);
+.timeline-text {
   font-size: 15px;
-  line-height: 1.5;
+  line-height: 1.6;
+  color: var(--text-secondary);
 }
 
 /* ==========================================================================
    Birthdays
    ========================================================================== */
 
-.birthdays {
+.birthdays-grid {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 8px;
 }
 
-.birthday-item {
-  padding: 8px 16px;
-  background: var(--bg-card);
-  border: 1px solid var(--glass-border);
-  border-radius: 20px;
-  font-size: 14px;
-  color: var(--text-secondary);
+.birthday-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  background: var(--bg-secondary);
+  font-size: 13px;
 }
 
-.birthday-item strong {
-  color: var(--accent-purple);
-  margin-right: 4px;
+.birthday-year {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  color: var(--accent);
 }
 
 /* ==========================================================================
-   Word Card
+   Word of the Day
    ========================================================================== */
 
-.word-card {
+.word-display {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 40px;
   padding: 32px;
   background: var(--bg-card);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--border-radius);
-  max-width: 600px;
+  border: 1px solid var(--border);
+  max-width: 700px;
 }
 
-.word-main {
-  display: flex;
-  align-items: baseline;
-  gap: 12px;
-  margin-bottom: 8px;
+.word-left {
+  text-align: right;
+  padding-right: 40px;
+  border-right: 1px solid var(--border);
 }
 
 .word-text {
-  font-size: 2rem;
-  font-weight: 700;
-  color: var(--accent-cyan);
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  line-height: 1;
+  margin-bottom: 8px;
 }
 
 .word-phonetic {
@@ -682,180 +628,181 @@ h3 {
 }
 
 .word-pos {
-  display: inline-block;
-  padding: 4px 12px;
-  background: rgba(139, 92, 246, 0.2);
-  border-radius: 20px;
-  font-size: 12px;
-  color: var(--accent-purple);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  color: var(--accent);
+  text-transform: uppercase;
   margin-bottom: 12px;
 }
 
 .word-definition {
-  font-size: 16px;
-  color: var(--text-primary);
-  margin-bottom: 12px;
-  line-height: 1.6;
-}
-
-.word-example {
-  font-size: 14px;
-  color: var(--text-secondary);
-  padding-left: 16px;
-  border-left: 3px solid var(--glass-border);
-}
-
-/* ==========================================================================
-   Number Card
-   ========================================================================== */
-
-.number-card {
-  display: flex;
-  align-items: center;
-  gap: 24px;
-  padding: 32px;
-  background: var(--bg-card);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--border-radius);
-  max-width: 600px;
-}
-
-.number-card .number {
-  font-size: 3rem;
-  font-weight: 800;
-  background: var(--gradient-primary);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  min-width: 100px;
-  text-align: center;
-}
-
-.number-card p {
-  flex: 1;
-  font-size: 15px;
-  color: var(--text-secondary);
-  line-height: 1.6;
-}
-
-/* ==========================================================================
-   Feature Grid
-   ========================================================================== */
-
-.feature-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
-}
-
-.feature-card {
-  padding: 28px;
-  background: var(--bg-card);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--border-radius);
-  transition: all var(--transition-normal);
-}
-
-.feature-card:hover {
-  transform: translateY(-4px);
-  border-color: rgba(255, 255, 255, 0.15);
-  box-shadow: var(--glass-shadow);
-}
-
-.feature-icon {
-  font-size: 2.5rem;
+  font-size: 1rem;
+  line-height: 1.7;
   margin-bottom: 16px;
 }
 
-.feature-title {
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: var(--text-primary);
-  margin-bottom: 8px;
-}
-
-.feature-desc {
-  font-size: 14px;
+.word-example {
+  font-style: italic;
   color: var(--text-secondary);
-  line-height: 1.5;
+  padding-left: 16px;
+  border-left: 2px solid var(--accent);
+  font-size: 14px;
 }
 
 /* ==========================================================================
-   Footer Note
+   Number Fact
    ========================================================================== */
 
-.footer-note {
+.number-display {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  padding: 32px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  max-width: 600px;
+}
+
+.number-big {
+  font-family: var(--font-display);
+  font-size: 4rem;
+  line-height: 1;
+  color: var(--accent);
+  min-width: 120px;
   text-align: center;
-  font-size: 13px;
-  color: var(--text-muted);
-  padding: 40px 0;
-  border-top: 1px solid var(--glass-border);
-  margin-top: 40px;
+}
+
+.number-fact-text {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
 }
 
 /* ==========================================================================
-   Responsive Design
+   Archive Link
+   ========================================================================== */
+
+.archive-banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 32px;
+  background: var(--bg-dark);
+  color: var(--text-light);
+  text-decoration: none;
+  margin-top: 48px;
+  transition: background 0.2s ease;
+}
+
+.archive-banner:hover {
+  background: #2a2a2a;
+  color: var(--text-light);
+}
+
+.archive-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  opacity: 0.6;
+  margin-bottom: 4px;
+}
+
+.archive-title {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+}
+
+.archive-arrow {
+  font-size: 1.5rem;
+  opacity: 0.6;
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+
+.site-footer {
+  padding: 48px 0;
+  text-align: center;
+  border-top: 1px solid var(--border);
+  margin-top: 48px;
+}
+
+.footer-timestamp {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+}
+
+/* ==========================================================================
+   Responsive
    ========================================================================== */
 
 @media (max-width: 768px) {
   main {
-    padding: 0 16px;
+    padding: 0 16px 60px;
   }
   
-  .hero {
-    padding: 60px 0 40px;
+  .site-nav {
+    display: none;
   }
   
-  .hero-title {
-    font-size: 2.5rem;
+  .masthead {
+    padding: 40px 0 32px;
   }
   
-  .hero-tagline {
-    font-size: 1rem;
+  .masthead-title {
+    font-size: 3.5rem;
   }
   
-  .snapshot-grid {
-    grid-template-columns: 1fr 1fr;
+  .snapshot-row {
+    grid-template-columns: repeat(2, 1fr);
   }
   
-  .stats-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-  
-  .crypto-table {
-    font-size: 13px;
-  }
-  
-  .crypto-table th,
-  .crypto-table td {
-    padding: 12px 10px;
+  .snapshot-item {
+    border-bottom: 1px solid var(--border);
   }
   
   .weather-grid {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, 1fr);
   }
   
-  .moon-card,
-  .word-card,
-  .number-card {
+  .timeline-item {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  
+  .word-display {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  
+  .word-left {
+    text-align: left;
+    padding-right: 0;
+    border-right: none;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+  }
+  
+  .number-display {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .number-big {
+    min-width: auto;
+  }
+  
+  .moon-display {
     max-width: 100%;
-  }
-  
-  .timeline {
-    padding-left: 30px;
-  }
-  
-  .timeline-dot {
-    left: -26px;
   }
 }
 
 @media (max-width: 480px) {
-  .snapshot-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .stats-grid {
+  .snapshot-row {
     grid-template-columns: 1fr;
   }
   
@@ -863,33 +810,7 @@ h3 {
     grid-template-columns: 1fr;
   }
   
-  .quote-banner {
-    padding: 24px 20px;
-  }
-  
-  .moon-card,
-  .number-card {
-    flex-direction: column;
-    text-align: center;
+  .weather-item {
+    border-right: none;
   }
 }
-
-/* ==========================================================================
-   Animations
-   ========================================================================== */
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.section {
-  animation: fadeIn 0.6s ease-out forwards;
-}
-
-/* Stagger animations */
-.section:nth-child(1) { animation-delay: 0.1s; }
-.section:nth-child(2) { animation-delay: 0.2s; }
-.section:nth-child(3) { animation-delay: 0.3s; }
-.section:nth-child(4) { animation-delay: 0.4s; }
-.section:nth-child(5) { animation-delay: 0.5s; }
