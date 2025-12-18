@@ -1,54 +1,58 @@
 /* ==========================================================================
-   The Daily Matrix - Editorial Design System
-   Anti-AI, Newspaper-inspired, Typography-first
+   The Daily Matrix - Bold Modern Design
+   Inspired by Awwwards, Ochi Design, Dennis Snellenberg
    ========================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
 
 /* CSS Custom Properties */
 :root {
-  /* Warm, editorial color palette - NO purple/cyan gradients */
-  --bg-primary: #FAFAF8;
-  --bg-secondary: #F0EDE8;
-  --bg-tertiary: #E8E4DD;
-  --bg-dark: #1A1A1A;
+  /* Bold two-tone palette */
+  --bg-light: #F5F5F0;
+  --bg-cream: #FFFCF7;
+  --bg-dark: #0A0A0A;
   --bg-card: #FFFFFF;
+  --bg-accent-section: #1A1A1A;
   
-  /* Text - high contrast */
-  --text-primary: #0D0D0D;
-  --text-secondary: #4A4A4A;
-  --text-muted: #7A7A7A;
-  --text-light: #FAFAF8;
+  /* Text */
+  --text-dark: #0A0A0A;
+  --text-light: #F5F5F0;
+  --text-muted: #6B6B6B;
+  --text-subtle: #9A9A9A;
   
-  /* Single bold accent - vermillion/orange-red */
-  --accent: #E63312;
-  --accent-hover: #CC2D10;
-  --accent-light: rgba(230, 51, 18, 0.1);
+  /* Accent - Bold orange/red */
+  --accent: #FF4D00;
+  --accent-hover: #E64500;
+  --accent-soft: rgba(255, 77, 0, 0.1);
   
-  /* Functional colors */
-  --positive: #1D7A3F;
-  --negative: #C62828;
-  --border: #D4D0C8;
+  /* Status */
+  --positive: #00C853;
+  --negative: #FF1744;
+  
+  /* Borders */
+  --border-light: #E0E0E0;
   --border-dark: #2A2A2A;
   
   /* Typography */
-  --font-display: 'Instrument Serif', Georgia, serif;
-  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-mono: 'JetBrains Mono', 'SF Mono', monospace;
+  --font-display: 'Space Grotesk', -apple-system, sans-serif;
+  --font-body: 'DM Sans', -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
   
-  /* Sizing */
-  --container-max: 1100px;
-  --grid-gap: 24px;
+  /* Spacing */
+  --container-max: 1200px;
+  --section-padding: 80px;
   
-  /* Editorial = sharp edges */
-  --radius: 0px;
+  /* Radius - Mix of sharp and rounded */
+  --radius-sharp: 0;
+  --radius-pill: 100px;
+  --radius-soft: 16px;
 }
 
 /* ==========================================================================
-   Base Styles
+   Base Reset & Globals
    ========================================================================== */
 
-* {
+*, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -56,165 +60,170 @@
 
 html {
   font-size: 16px;
+  scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 body {
   font-family: var(--font-body);
-  background: var(--bg-primary);
-  color: var(--text-primary);
+  background: var(--bg-light);
+  color: var(--text-dark);
   line-height: 1.6;
-  min-height: 100vh;
+  overflow-x: hidden;
 }
 
-main {
-  max-width: var(--container-max);
-  margin: 0 auto;
-  padding: 0 24px 80px;
-}
-
-/* ==========================================================================
-   Typography - Editorial Style
-   ========================================================================== */
-
-h1, h2, h3, h4 {
-  font-family: var(--font-display);
-  font-weight: 400;
-  line-height: 1.1;
-  letter-spacing: -0.02em;
-}
-
-a {
-  color: var(--text-primary);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  transition: color 0.15s ease;
-}
-
-a:hover {
-  color: var(--accent);
+::selection {
+  background: var(--accent);
+  color: var(--text-light);
 }
 
 /* ==========================================================================
-   Header & Navigation
+   Header - Minimal & Clean
    ========================================================================== */
 
 .site-header {
-  border-bottom: 1px solid var(--border);
-  padding: 16px 0;
-  position: sticky;
+  position: fixed;
   top: 0;
-  background: var(--bg-primary);
-  z-index: 100;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 20px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  mix-blend-mode: difference;
+}
+
+.site-logo {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  color: var(--text-light);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-transform: uppercase;
+}
+
+.logo-dot {
+  width: 10px;
+  height: 10px;
+  background: var(--accent);
+  border-radius: 50%;
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% { 
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% { 
+    opacity: 0.6;
+    transform: scale(0.9);
+  }
 }
 
 .header-inner {
+  width: 100%;
   max-width: var(--container-max);
   margin: 0 auto;
-  padding: 0 24px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.site-logo {
-  font-family: var(--font-body);
-  font-size: 13px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  text-decoration: none;
-  color: var(--text-primary);
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.site-logo:hover {
-  color: var(--text-primary);
-}
-
-.logo-dot {
-  width: 8px;
-  height: 8px;
-  background: var(--accent);
-  border-radius: 50%;
-}
-
 .site-nav {
   display: flex;
-  gap: 32px;
+  gap: 8px;
 }
 
 .nav-link {
-  font-size: 13px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
   text-decoration: none;
-  color: var(--text-secondary);
-  transition: color 0.15s ease;
-  position: relative;
+  color: var(--text-light);
+  padding: 10px 20px;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(10px);
 }
 
 .nav-link:hover,
 .nav-link.active {
-  color: var(--text-primary);
-}
-
-.nav-link.active::after {
-  content: '';
-  position: absolute;
-  bottom: -4px;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: var(--text-primary);
+  background: var(--text-light);
+  color: var(--text-dark);
+  border-color: var(--text-light);
 }
 
 /* ==========================================================================
-   Masthead / Hero - Newspaper Style
+   Masthead - Giant Hero Typography
    ========================================================================== */
 
 .masthead {
-  padding: 60px 0 48px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   text-align: center;
-  border-bottom: 1px solid var(--border);
+  padding: 120px 40px 80px;
+  background: var(--bg-dark);
+  color: var(--text-light);
+  position: relative;
+  overflow: hidden;
+}
+
+.masthead::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 800px;
+  height: 800px;
+  background: radial-gradient(circle, rgba(255, 77, 0, 0.1) 0%, transparent 70%);
+  pointer-events: none;
 }
 
 .masthead-date {
   font-family: var(--font-mono);
   font-size: 12px;
-  letter-spacing: 0.15em;
-  color: var(--text-muted);
-  margin-bottom: 20px;
+  letter-spacing: 0.3em;
+  color: var(--text-subtle);
   text-transform: uppercase;
+  margin-bottom: 40px;
+  opacity: 0.7;
 }
 
 .masthead-title {
   font-family: var(--font-display);
-  font-size: clamp(4rem, 15vw, 8rem);
-  font-weight: 400;
-  letter-spacing: -0.03em;
+  font-size: clamp(60px, 15vw, 180px);
+  font-weight: 700;
+  letter-spacing: -0.04em;
   line-height: 0.85;
-  margin-bottom: 20px;
+  margin-bottom: 32px;
+  text-transform: uppercase;
 }
 
 .masthead-subtitle {
-  font-family: var(--font-display);
-  font-size: 1.25rem;
-  font-style: italic;
-  color: var(--text-secondary);
+  font-family: var(--font-body);
+  font-size: clamp(16px, 2vw, 20px);
+  font-weight: 400;
+  color: var(--text-subtle);
   max-width: 500px;
-  margin: 0 auto;
+  line-height: 1.6;
 }
 
 .edition-info {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 24px;
-  margin-top: 32px;
-  padding-top: 24px;
-  border-top: 1px solid var(--border);
+  gap: 16px;
+  margin-top: 60px;
 }
 
 .edition-badge {
@@ -224,29 +233,88 @@ a:hover {
   font-family: var(--font-mono);
   font-size: 11px;
   letter-spacing: 0.05em;
-  color: var(--text-muted);
+  color: var(--text-subtle);
+  padding: 10px 20px;
+  border: 1px solid var(--border-dark);
+  border-radius: var(--radius-pill);
+  text-transform: uppercase;
 }
 
 .live-dot {
   width: 6px;
   height: 6px;
-  background: var(--accent);
+  background: var(--positive);
   border-radius: 50%;
-  animation: pulse 2s ease-in-out infinite;
+  animation: blink 1.5s ease-in-out infinite;
 }
 
-@keyframes pulse {
+@keyframes blink {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.3; }
 }
 
 /* ==========================================================================
-   Section Headers
+   Main Content Area
+   ========================================================================== */
+
+main {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+/* ==========================================================================
+   Quote Banner - Full Width Marquee Style
+   ========================================================================== */
+
+.quote-banner {
+  background: var(--accent);
+  color: var(--bg-dark);
+  padding: 24px 0;
+  margin: 0 -40px;
+  width: calc(100% + 80px);
+  overflow: hidden;
+}
+
+.quote-inner {
+  display: flex;
+  align-items: center;
+  gap: 48px;
+  animation: marquee 30s linear infinite;
+  white-space: nowrap;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.quote-text {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.quote-author {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  opacity: 0.7;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.quote-divider {
+  font-size: 14px;
+  opacity: 0.5;
+}
+
+/* ==========================================================================
+   Sections - Bold Headers
    ========================================================================== */
 
 .section {
-  padding: 48px 0;
-  border-bottom: 1px solid var(--border);
+  padding: var(--section-padding) 0;
+  border-bottom: 1px solid var(--border-light);
 }
 
 .section:last-of-type {
@@ -255,113 +323,109 @@ a:hover {
 
 .section-header {
   display: flex;
-  align-items: baseline;
-  gap: 16px;
-  margin-bottom: 32px;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 48px;
+  gap: 20px;
 }
 
 .section-title {
   font-family: var(--font-display);
-  font-size: 2rem;
+  font-size: clamp(40px, 8vw, 72px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  text-transform: uppercase;
 }
 
 .section-number {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 14px;
   color: var(--text-muted);
-  letter-spacing: 0.05em;
+  padding: 8px 16px;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-pill);
+  flex-shrink: 0;
 }
 
 /* ==========================================================================
-   Quote Banner
-   ========================================================================== */
-
-.quote-banner {
-  padding: 48px 0;
-  border-bottom: 1px solid var(--border);
-}
-
-.quote-inner {
-  max-width: 800px;
-  margin: 0 auto;
-  text-align: center;
-}
-
-.quote-text {
-  font-family: var(--font-display);
-  font-size: clamp(1.75rem, 4vw, 2.5rem);
-  font-style: italic;
-  line-height: 1.35;
-  margin-bottom: 20px;
-}
-
-.quote-author {
-  font-family: var(--font-mono);
-  font-size: 12px;
-  letter-spacing: 0.1em;
-  color: var(--text-muted);
-  text-transform: uppercase;
-}
-
-/* ==========================================================================
-   Market Snapshot - Ticker Style
+   Market Snapshot - Ticker Style Cards
    ========================================================================== */
 
 .snapshot-row {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  border: 1px solid var(--border);
-  background: var(--bg-card);
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
 }
 
 .snapshot-item {
-  padding: 20px;
-  border-right: 1px solid var(--border);
-  text-align: center;
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-soft);
+  padding: 24px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.snapshot-item:last-child {
-  border-right: none;
+.snapshot-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+  border-color: var(--accent);
 }
 
 .snapshot-label {
   font-family: var(--font-mono);
   font-size: 10px;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.15em;
   color: var(--text-muted);
   text-transform: uppercase;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
 }
 
 .snapshot-value {
-  font-family: var(--font-mono);
-  font-size: 1.25rem;
-  font-weight: 600;
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
 }
 
 .snapshot-change {
   font-family: var(--font-mono);
-  font-size: 12px;
-  margin-top: 4px;
+  font-size: 13px;
+  font-weight: 500;
+  margin-top: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
 }
 
-.snapshot-change.positive { color: var(--positive); }
-.snapshot-change.negative { color: var(--negative); }
+.snapshot-change.positive {
+  color: var(--positive);
+  background: rgba(0, 200, 83, 0.1);
+}
+
+.snapshot-change.negative {
+  color: var(--negative);
+  background: rgba(255, 23, 68, 0.1);
+}
 
 .snapshot-sub {
-  font-size: 11px;
+  font-size: 12px;
   color: var(--text-muted);
   margin-top: 4px;
 }
 
 /* ==========================================================================
-   Crypto Table
+   Crypto Table - Clean Data Display
    ========================================================================== */
 
 .table-wrapper {
-  overflow-x: auto;
-  border: 1px solid var(--border);
   background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-soft);
+  overflow: hidden;
+  margin-top: 32px;
 }
 
 .data-table {
@@ -373,27 +437,20 @@ a:hover {
   font-family: var(--font-mono);
   font-size: 10px;
   font-weight: 500;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
   color: var(--text-muted);
   text-align: left;
-  padding: 14px 16px;
-  border-bottom: 1px solid var(--border);
-  background: var(--bg-secondary);
-}
-
-.data-table th:first-child {
-  padding-left: 20px;
+  padding: 16px 20px;
+  background: var(--bg-light);
+  border-bottom: 1px solid var(--border-light);
 }
 
 .data-table td {
-  padding: 14px 16px;
-  border-bottom: 1px solid var(--border);
+  padding: 20px;
   font-size: 14px;
-}
-
-.data-table td:first-child {
-  padding-left: 20px;
+  border-bottom: 1px solid var(--border-light);
+  transition: background 0.2s ease;
 }
 
 .data-table tr:last-child td {
@@ -401,7 +458,7 @@ a:hover {
 }
 
 .data-table tr:hover td {
-  background: var(--bg-secondary);
+  background: var(--bg-light);
 }
 
 .coin-info {
@@ -418,7 +475,9 @@ a:hover {
 }
 
 .coin-symbol {
+  font-family: var(--font-display);
   font-weight: 600;
+  font-size: 15px;
 }
 
 .coin-name {
@@ -434,122 +493,193 @@ a:hover {
 .change-cell {
   font-family: var(--font-mono);
   font-size: 13px;
+  font-weight: 500;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  display: inline-block;
 }
 
-.change-cell.positive { color: var(--positive); }
-.change-cell.negative { color: var(--negative); }
+.change-cell.positive {
+  color: var(--positive);
+  background: rgba(0, 200, 83, 0.1);
+}
+
+.change-cell.negative {
+  color: var(--negative);
+  background: rgba(255, 23, 68, 0.1);
+}
 
 .market-summary {
   display: flex;
   justify-content: center;
   gap: 32px;
-  margin-top: 16px;
+  margin-top: 24px;
+  padding: 16px;
+  background: var(--bg-light);
+  border-radius: var(--radius-pill);
   font-family: var(--font-mono);
   font-size: 12px;
-  color: var(--text-muted);
 }
 
-.summary-up { color: var(--positive); }
-.summary-down { color: var(--negative); }
+.summary-up {
+  color: var(--positive);
+}
+
+.summary-down {
+  color: var(--negative);
+}
 
 /* ==========================================================================
-   Weather Grid
+   Weather Grid - Bold Cards
    ========================================================================== */
 
 .weather-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  border: 1px solid var(--border);
-  background: var(--bg-card);
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
 }
 
 .weather-item {
-  padding: 24px 20px;
-  border-right: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-soft);
+  padding: 28px 24px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
 }
 
-.weather-item:nth-child(6n) {
-  border-right: none;
+.weather-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.weather-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+}
+
+.weather-item:hover::before {
+  opacity: 1;
 }
 
 .weather-city {
-  font-weight: 500;
-  margin-bottom: 12px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 16px;
+  margin-bottom: 16px;
 }
 
 .weather-temp {
-  font-family: var(--font-mono);
-  font-size: 2.5rem;
-  font-weight: 600;
+  font-family: var(--font-display);
+  font-size: 48px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
   line-height: 1;
 }
 
 .weather-unit {
-  font-size: 1rem;
+  font-size: 20px;
+  font-weight: 400;
   color: var(--text-muted);
 }
 
 .weather-condition {
-  font-size: 13px;
-  color: var(--text-secondary);
-  margin-top: 8px;
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-top: 12px;
+  text-transform: capitalize;
 }
 
 .weather-details {
   display: flex;
-  gap: 12px;
-  margin-top: 12px;
+  gap: 16px;
+  margin-top: 16px;
   font-family: var(--font-mono);
   font-size: 11px;
-  color: var(--text-muted);
+  color: var(--text-subtle);
 }
 
 /* ==========================================================================
-   Moon Display
+   Moon Display - Dramatic
    ========================================================================== */
 
 .moon-display {
   display: flex;
   align-items: center;
-  gap: 32px;
-  padding: 32px;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  max-width: 400px;
+  gap: 40px;
+  padding: 48px;
+  background: var(--bg-dark);
+  color: var(--text-light);
+  border-radius: var(--radius-soft);
+  max-width: 500px;
+  position: relative;
+  overflow: hidden;
+}
+
+.moon-display::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: -100px;
+  transform: translateY(-50%);
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
+  pointer-events: none;
 }
 
 .moon-visual {
-  font-size: 4rem;
+  font-size: 80px;
   line-height: 1;
+  filter: drop-shadow(0 0 40px rgba(255, 255, 255, 0.3));
+}
+
+.moon-info {
+  position: relative;
+  z-index: 1;
 }
 
 .moon-phase-name {
   font-family: var(--font-display);
-  font-size: 1.5rem;
-  margin-bottom: 4px;
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 8px;
 }
 
 .moon-illumination {
   font-family: var(--font-mono);
   font-size: 13px;
-  color: var(--text-muted);
+  color: var(--text-subtle);
 }
 
 /* ==========================================================================
-   Timeline
+   Timeline - Clean & Modern
    ========================================================================== */
 
 .timeline {
-  max-width: 700px;
+  max-width: 800px;
 }
 
 .timeline-item {
   display: grid;
-  grid-template-columns: 80px 1fr;
-  gap: 24px;
-  padding: 16px 0;
-  border-bottom: 1px solid var(--border);
+  grid-template-columns: 100px 1fr;
+  gap: 32px;
+  padding: 24px 0;
+  border-bottom: 1px solid var(--border-light);
+  transition: all 0.3s ease;
+}
+
+.timeline-item:hover {
+  padding-left: 16px;
+  border-color: var(--accent);
 }
 
 .timeline-item:last-child {
@@ -557,35 +687,45 @@ a:hover {
 }
 
 .timeline-year {
-  font-family: var(--font-mono);
-  font-size: 14px;
-  font-weight: 600;
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 700;
   color: var(--accent);
 }
 
 .timeline-text {
-  font-size: 15px;
-  line-height: 1.6;
-  color: var(--text-secondary);
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--text-muted);
 }
 
 /* ==========================================================================
-   Birthdays
+   Birthdays - Tags
    ========================================================================== */
 
 .birthdays-grid {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 10px;
+  margin-top: 32px;
 }
 
 .birthday-tag {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 8px 14px;
-  background: var(--bg-secondary);
-  font-size: 13px;
+  gap: 10px;
+  padding: 12px 20px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-pill);
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.birthday-tag:hover {
+  background: var(--bg-dark);
+  color: var(--text-light);
+  border-color: var(--bg-dark);
 }
 
 .birthday-year {
@@ -594,175 +734,271 @@ a:hover {
   color: var(--accent);
 }
 
+.birthday-tag:hover .birthday-year {
+  color: var(--accent);
+}
+
 /* ==========================================================================
-   Word of the Day
+   Word of the Day - Split Layout
    ========================================================================== */
 
 .word-display {
   display: grid;
   grid-template-columns: auto 1fr;
-  gap: 40px;
-  padding: 32px;
+  gap: 48px;
+  padding: 48px;
   background: var(--bg-card);
-  border: 1px solid var(--border);
-  max-width: 700px;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-soft);
+  max-width: 800px;
 }
 
 .word-left {
-  text-align: right;
-  padding-right: 40px;
-  border-right: 1px solid var(--border);
+  padding-right: 48px;
+  border-right: 1px solid var(--border-light);
 }
 
 .word-text {
   font-family: var(--font-display);
-  font-size: 2.5rem;
+  font-size: 48px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
   line-height: 1;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
 }
 
 .word-phonetic {
+  font-family: var(--font-mono);
   font-size: 14px;
   color: var(--text-muted);
-  font-style: italic;
+}
+
+.word-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .word-pos {
   font-family: var(--font-mono);
   font-size: 11px;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.15em;
   color: var(--accent);
   text-transform: uppercase;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 }
 
 .word-definition {
-  font-size: 1rem;
+  font-size: 18px;
   line-height: 1.7;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
 }
 
 .word-example {
   font-style: italic;
-  color: var(--text-secondary);
-  padding-left: 16px;
-  border-left: 2px solid var(--accent);
-  font-size: 14px;
+  color: var(--text-muted);
+  padding-left: 20px;
+  border-left: 3px solid var(--accent);
+  font-size: 15px;
+  line-height: 1.6;
 }
 
 /* ==========================================================================
-   Number Fact
+   Number Fact - Big & Bold
    ========================================================================== */
 
 .number-display {
   display: flex;
   align-items: center;
-  gap: 32px;
-  padding: 32px;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  max-width: 600px;
+  gap: 48px;
+  padding: 48px;
+  background: linear-gradient(135deg, var(--bg-dark) 0%, #1a1a1a 100%);
+  color: var(--text-light);
+  border-radius: var(--radius-soft);
+  max-width: 700px;
 }
 
 .number-big {
   font-family: var(--font-display);
-  font-size: 4rem;
+  font-size: 100px;
+  font-weight: 700;
+  letter-spacing: -0.04em;
   line-height: 1;
   color: var(--accent);
-  min-width: 120px;
+  min-width: 150px;
   text-align: center;
 }
 
 .number-fact-text {
-  font-size: 1rem;
+  font-size: 18px;
   line-height: 1.7;
-  color: var(--text-secondary);
+  color: var(--text-subtle);
 }
 
 /* ==========================================================================
-   Archive Link
+   Archive Banner - Call to Action
    ========================================================================== */
 
 .archive-banner {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 24px 32px;
-  background: var(--bg-dark);
-  color: var(--text-light);
+  padding: 40px 48px;
+  background: var(--accent);
+  color: var(--bg-dark);
   text-decoration: none;
-  margin-top: 48px;
-  transition: background 0.2s ease;
+  border-radius: var(--radius-soft);
+  margin-top: 80px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.archive-banner::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.6s ease;
+}
+
+.archive-banner:hover::before {
+  left: 100%;
 }
 
 .archive-banner:hover {
-  background: #2a2a2a;
-  color: var(--text-light);
+  transform: scale(1.02);
+  box-shadow: 0 20px 60px rgba(255, 77, 0, 0.3);
 }
 
 .archive-label {
   font-family: var(--font-mono);
   font-size: 11px;
-  letter-spacing: 0.1em;
-  opacity: 0.6;
-  margin-bottom: 4px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  opacity: 0.7;
+  margin-bottom: 8px;
 }
 
 .archive-title {
   font-family: var(--font-display);
-  font-size: 1.25rem;
+  font-size: 28px;
+  font-weight: 700;
 }
 
 .archive-arrow {
-  font-size: 1.5rem;
-  opacity: 0.6;
+  font-size: 32px;
+  transition: transform 0.3s ease;
+}
+
+.archive-banner:hover .archive-arrow {
+  transform: translateX(8px);
 }
 
 /* ==========================================================================
-   Footer
+   Footer - Minimal
    ========================================================================== */
 
 .site-footer {
-  padding: 48px 0;
+  padding: 60px 40px;
   text-align: center;
-  border-top: 1px solid var(--border);
-  margin-top: 48px;
+  background: var(--bg-dark);
+  color: var(--text-light);
+  margin-top: 80px;
 }
 
 .footer-timestamp {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: 0.05em;
-  color: var(--text-muted);
+  color: var(--text-subtle);
 }
 
 /* ==========================================================================
-   Responsive
+   Dark Section Variant
    ========================================================================== */
 
+.section.dark {
+  background: var(--bg-dark);
+  color: var(--text-light);
+  margin: 0 -40px;
+  padding: var(--section-padding) 40px;
+}
+
+.section.dark .section-title {
+  color: var(--text-light);
+}
+
+.section.dark .section-number {
+  border-color: var(--border-dark);
+  color: var(--text-subtle);
+}
+
+/* ==========================================================================
+   Responsive Design
+   ========================================================================== */
+
+@media (max-width: 1024px) {
+  :root {
+    --section-padding: 60px;
+  }
+  
+  .masthead-title {
+    font-size: clamp(48px, 12vw, 120px);
+  }
+  
+  .section-title {
+    font-size: clamp(32px, 6vw, 56px);
+  }
+}
+
 @media (max-width: 768px) {
-  main {
-    padding: 0 16px 60px;
+  .site-header {
+    padding: 16px 24px;
   }
   
   .site-nav {
     display: none;
   }
   
+  main {
+    padding: 0 24px;
+  }
+  
   .masthead {
-    padding: 40px 0 32px;
+    padding: 100px 24px 60px;
+    min-height: auto;
   }
   
   .masthead-title {
-    font-size: 3.5rem;
+    font-size: 48px;
+  }
+  
+  .edition-info {
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .quote-banner {
+    margin: 0 -24px;
+    width: calc(100% + 48px);
+  }
+  
+  .section {
+    padding: 48px 0;
+  }
+  
+  .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
   }
   
   .snapshot-row {
     grid-template-columns: repeat(2, 1fr);
-  }
-  
-  .snapshot-item {
-    border-bottom: 1px solid var(--border);
   }
   
   .weather-grid {
@@ -776,28 +1012,48 @@ a:hover {
   
   .word-display {
     grid-template-columns: 1fr;
-    gap: 24px;
+    gap: 32px;
+    padding: 32px;
   }
   
   .word-left {
-    text-align: left;
     padding-right: 0;
+    padding-bottom: 32px;
     border-right: none;
-    padding-bottom: 24px;
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid var(--border-light);
+  }
+  
+  .word-text {
+    font-size: 36px;
   }
   
   .number-display {
     flex-direction: column;
     text-align: center;
+    padding: 32px;
   }
   
   .number-big {
+    font-size: 72px;
     min-width: auto;
   }
   
   .moon-display {
+    flex-direction: column;
+    text-align: center;
     max-width: 100%;
+    padding: 32px;
+  }
+  
+  .archive-banner {
+    padding: 32px;
+    flex-direction: column;
+    text-align: center;
+    gap: 16px;
+  }
+  
+  .archive-arrow {
+    display: none;
   }
 }
 
@@ -810,7 +1066,31 @@ a:hover {
     grid-template-columns: 1fr;
   }
   
-  .weather-item {
-    border-right: none;
+  .birthday-tag {
+    width: 100%;
+    justify-content: center;
   }
+}
+
+/* ==========================================================================
+   Smooth Scrolling & Animation Helpers
+   ========================================================================== */
+
+@media (prefers-reduced-motion: no-preference) {
+  .snapshot-item,
+  .weather-item,
+  .birthday-tag,
+  .timeline-item {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}
+
+/* Prevent FOUC */
+.loading {
+  opacity: 0;
+}
+
+.loaded {
+  opacity: 1;
+  transition: opacity 0.3s ease;
 }

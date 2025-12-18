@@ -55,11 +55,21 @@ export default async function Home() {
           </div>
         </section>
 
-        {/* Quote of the Day */}
+        {/* Quote of the Day - Marquee */}
         <section className="quote-banner">
           <div className="quote-inner">
-            <p className="quote-text">"{data.quote.quote}"</p>
+            <span className="quote-text">"{data.quote.quote}"</span>
             <span className="quote-author">— {data.quote.author}</span>
+            <span className="quote-divider">✦</span>
+            <span className="quote-text">"{data.quote.quote}"</span>
+            <span className="quote-author">— {data.quote.author}</span>
+            <span className="quote-divider">✦</span>
+            <span className="quote-text">"{data.quote.quote}"</span>
+            <span className="quote-author">— {data.quote.author}</span>
+            <span className="quote-divider">✦</span>
+            <span className="quote-text">"{data.quote.quote}"</span>
+            <span className="quote-author">— {data.quote.author}</span>
+            <span className="quote-divider">✦</span>
           </div>
         </section>
 
